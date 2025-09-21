@@ -13,7 +13,9 @@ import { MailModule } from './modules/mail/mail.module';
     BullModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        connection: configService.get('redis.url')!,
+        connection: {
+          url : configService.getOrThrow('redis.url')
+        },
       }),
     }),
     QueueModule,
