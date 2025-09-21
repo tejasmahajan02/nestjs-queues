@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { APP_QUEUE } from './constants/variables.constant';
 import { BullModule } from '@nestjs/bullmq';
 
+@Global()
 @Module({
   imports: [
     BullModule.registerQueue({

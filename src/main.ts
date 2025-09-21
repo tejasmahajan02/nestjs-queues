@@ -16,7 +16,7 @@ async function bootstrap() {
     body: `App restarted at ${new Date().toLocaleString('en-GB')}`,
   });
 
-  const port = configService.get<number>('NODE_PORT', 5000);
+  const port = configService.get<number>('NODE_PORT', 3000);
   await app.listen(port, '0.0.0.0');
   Logger.debug(`This application is running on: ${await app.getUrl()}`);
 }
