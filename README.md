@@ -96,3 +96,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Queue & Job Processing
+
+For details on queue setup, best practices, and limitations, see [docs/queues.md](docs/queues.md).
