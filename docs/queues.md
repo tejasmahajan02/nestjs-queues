@@ -125,6 +125,31 @@ if (job.name === JobNames.MAIL_SEND) handleMail(job.data);
 
 ---
 
+## 🔧 Advanced Worker Options (Optional)
+
+For development or low-traffic environments, you can **tune worker settings** to reduce Redis command usage:
+
+```ts
+@Processor(APP_QUEUE, {
+  stalledInterval: 120_000, // check for stalled jobs every 2 minutes instead of the default ~30s
+  lockDuration: 30_000,     // how long a job lock lasts
+  concurrency: 1,           // process one job at a time per worker
+})
+export class MailProcessor extends WorkerHost{
+}
+```
+
+**Notes:**
+
+* `stalledInterval`: Increase this to reduce Redis polling for stalled jobs in low-traffic environments.
+* `lockDuration`: Default is fine; adjust only if jobs may take longer than expected.
+* `concurrency`: Lowering concurrency reduces simultaneous Redis commands.
+* These settings are **optional** — in production, you can revert to default values for better throughput.
+
+This makes it clear for developers that **they can tune workers** to minimize Redis load without affecting the shared queue architecture.
+
+---
+
 ## ⚡ Optional: Dedicated Queue Example
 
 Sometimes you may need a **separate queue** for strict rate-limits, retries, or isolation:

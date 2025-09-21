@@ -5,8 +5,9 @@ import { Job } from 'bullmq';
 import { MailJobNames } from './constants/mail-job.constant';
 import { MailData } from './types/mail-data.type';
 import { delay } from 'src/common/utils/helpers.util';
+import { getWorkerOptions } from 'src/config/bull-jobs-options.config';
 
-@Processor(APP_QUEUE)
+@Processor(APP_QUEUE, getWorkerOptions())
 export class MailProcessor extends WorkerHost {
   private readonly logger = new Logger(MailProcessor.name);
 
